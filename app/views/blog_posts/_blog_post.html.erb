@@ -1,10 +1,5 @@
 <div class="w-full h-75 rounded-lg bg-gray-500 flex flex-col">
-  <% if blog_post.banner_image.attached? %>
-    <%= image_tag blog_post.banner_image , class: "h-64 object-cover rounded-lg"%>
-  <% else %>
-    <%= image_tag "noIMG.png", class:"h-64 object-cover rounded-t-lg" %>
-  <% end %>
-
+  <%= blog_banner_img(blog_post) %>
   <div class="h-16 px-4">
     <p class="text-xl text-indigo-100 overflow-hidden">
       <%= blog_post.title%>
