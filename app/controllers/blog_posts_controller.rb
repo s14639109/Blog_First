@@ -3,11 +3,11 @@ class BlogPostsController < ApplicationController
 
   # GET /blog_posts or /blog_posts.json
   def index
-    if params[:query].present?
-    @blog_posts = BlogPost.where("title LIKE ?", "%#{params[:query]}%")
-  else
-    @blog_posts = BlogPost.all
-  end
+
+  # 建立 Ransack 搜尋物件
+    @q = BlogPost.ransack(params[:q])
+  # 執行搜尋結果
+    @blog_posts = @q.result(distinct: true)
   end
 
   # GET /blog_posts/1 or /blog_posts/1.json
