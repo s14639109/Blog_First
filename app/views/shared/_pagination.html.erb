@@ -1,0 +1,34 @@
+<% if collection.total_pages > 1 %>
+  <nav class="flex justify-center mt-6">
+    <ul class="flex space-x-2">
+
+      <% if collection.prev_page %>
+        <li>
+          <%= link_to "&laquo;".html_safe, url_for(page: collection.prev_page),
+                class: "px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300" %>
+        </li>
+      <% end %>
+
+      <% (1..collection.total_pages).each do |page| %>
+        <% if page == collection.current_page %>
+          <li>
+            <span class="px-3 py-1 rounded bg-blue-500 text-white font-bold shadow"><%= page %></span>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to page, url_for(page: page),
+                  class: "px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300" %>
+          </li>
+        <% end %>
+      <% end %>
+
+      <% if collection.next_page %>
+        <li>
+          <%= link_to "&raquo;".html_safe, url_for(page: collection.next_page),
+                class: "px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300" %>
+        </li>
+      <% end %>
+
+    </ul>
+  </nav>
+<% end %>
