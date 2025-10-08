@@ -23,8 +23,13 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+     <nav>
+        <%= link_to "Home", root_path %>
+        <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+      </nav>
+
+      <main>
+        <%= yield %>
+      </main>
   </body>
 </html>
