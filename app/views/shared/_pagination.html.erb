@@ -1,16 +1,16 @@
-<% if collection.total_pages > 1 %>
+<% if records.total_pages > 1 %>
   <nav class="flex justify-center mt-6">
     <ul class="flex space-x-2">
 
-      <% if collection.prev_page %>
+      <% if records.prev_page %>
         <li>
-          <%= link_to "&laquo;".html_safe, url_for(page: collection.prev_page),
+          <%= link_to "&laquo;".html_safe, url_for(page: records.prev_page),
                 class: "px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300" %>
         </li>
       <% end %>
 
-      <% (1..collection.total_pages).each do |page| %>
-        <% if page == collection.current_page %>
+      <% (1..records.total_pages).each do |page| %>
+        <% if page == records.current_page %>
           <li>
             <span class="px-3 py-1 rounded bg-blue-500 text-white font-bold shadow"><%= page %></span>
           </li>
@@ -22,13 +22,12 @@
         <% end %>
       <% end %>
 
-      <% if collection.next_page %>
+      <% if records.next_page %>
         <li>
-          <%= link_to "&raquo;".html_safe, url_for(page: collection.next_page),
+          <%= link_to "&raquo;".html_safe, url_for(page: records.next_page),
                 class: "px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300" %>
         </li>
       <% end %>
-
     </ul>
   </nav>
 <% end %>
