@@ -1,0 +1,21 @@
+<!-- app/views/shared/_navbar.html.erb -->
+<nav class="bg-gray-800 text-white px-6 py-3 flex justify-between items-center shadow-md">
+  <div class="flex items-center space-x-4">
+    <!-- 部落格名稱 -->
+    <h1 class="text-xl font-bold">
+      <%= link_to "MyBlog", root_path, class: "hover:text-blue-300" %>
+    </h1>
+
+    <!-- Home 按鈕 -->
+    <%= link_to "Home", root_path, class: "hover:text-blue-300" %>
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <% if user_signed_in? %>
+      <span>Hi, <%= current_user.email %></span>
+      <%= button_to "登出", session_path(current_user.id), method: :delete, class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" %>
+    <% else %>
+      <%= link_to "登入", new_session_path, class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+    <% end %>
+  </div>
+</nav>

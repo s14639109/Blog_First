@@ -4,8 +4,6 @@ source "https://rubygems.org"
 gem 'ransack', '~> 4.4', '>= 4.4.1'
 # pagination
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
-
-
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2", ">= 8.0.2.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]

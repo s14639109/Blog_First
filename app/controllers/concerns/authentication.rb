@@ -3,13 +3,25 @@ module Authentication
 
   included do
     before_action :require_authentication
-    helper_method :authenticated?
+    helper_method :authenticated?, :current_user, :user_signed_in?
   end
 
   class_methods do
     def allow_unauthenticated_access(**options)
       skip_before_action :require_authentication, **options
     end
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def user_signed_in?
+    current_user.present?
+  end
+
+  def authenticate_user!
+    redirect_to new_session_path unless user_signed_in?
   end
 
   private

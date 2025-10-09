@@ -22,14 +22,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-     <nav>
-        <%= link_to "Home", root_path %>
-        <%= button_to "Log out", session_path, method: :delete if authenticated? %>
-      </nav>
+<body class="bg-gray-100 text-gray-900">
+    <!-- 導覽列 -->
+    <%= render "shared/navbar" %>
 
-      <main>
-        <%= yield %>
-      </main>
+    <!-- 主內容 -->
+    <main class="container mx-auto mt-6">
+      <%= yield %>
+    </main>
   </body>
 </html>
