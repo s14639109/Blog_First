@@ -13,7 +13,7 @@ module Authentication
   end
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+    Current.user  # 從 Current.session 取得 user
   end
 
   def user_signed_in?
@@ -24,6 +24,16 @@ module Authentication
     redirect_to new_session_path unless user_signed_in?
   end
 
+  protected
+    # 這些方法設為 protected，讓 ApplicationController 可以調用
+    def resume_session
+      Current.session ||= find_session_by_cookie
+    end
+
+    def find_session_by_cookie
+      Session.find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
+    end
+
   private
     def authenticated?
       resume_session
@@ -31,14 +41,6 @@ module Authentication
 
     def require_authentication
       resume_session || request_authentication
-    end
-
-    def resume_session
-      Current.session ||= find_session_by_cookie
-    end
-
-    def find_session_by_cookie
-      Session.find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
     end
 
     def request_authentication
@@ -58,7 +60,9 @@ module Authentication
     end
 
     def terminate_session
+      # 從資料庫刪除目前的 session 紀錄
       Current.session.destroy
+      # 刪除瀏覽器的 cookie
       cookies.delete(:session_id)
     end
 end

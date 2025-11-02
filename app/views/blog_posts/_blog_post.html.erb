@@ -4,6 +4,9 @@
     <p class="text-xl text-indigo-100 overflow-hidden">
       <%= blog_post.title%>
     </p>
+    <p class="text-sm text-indigo-200 mt-1">
+      作者：<%= blog_post.user.email_address %>
+    </p>
   </div>
   <div class="w-full h-full flex items-center px-4">
     <%= link_to "Read post", blog_post, class:"px-3 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 via-indigo-500 text-indigo-50 hover:scale-105"%>
