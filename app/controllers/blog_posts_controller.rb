@@ -1,5 +1,7 @@
 class BlogPostsController < ApplicationController
+  allow_unauthenticated_access only: %i[ index show ]
   before_action :set_blog_post, only: %i[ show edit update destroy ]
+  before_action :authorize_user!, only: %i[ edit update destroy ]
 
   # GET /blog_posts or /blog_posts.json
   def index
@@ -25,7 +27,7 @@ class BlogPostsController < ApplicationController
 
   # POST /blog_posts or /blog_posts.json
   def create
-    @blog_post = BlogPost.new(blog_post_params)
+    @blog_post = current_user.blog_posts.build(blog_post_params)
 
     respond_to do |format|
       if @blog_post.save
@@ -65,6 +67,13 @@ class BlogPostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_blog_post
       @blog_post = BlogPost.find(params.expect(:id))
+    end
+
+    # 檢查當前用戶是否為文章作者
+    def authorize_user!
+      unless @blog_post.user == current_user
+        redirect_to blog_posts_path, alert: "你沒有權限執行此操作"
+      end
     end
 
     # Only allow a list of trusted parameters through.

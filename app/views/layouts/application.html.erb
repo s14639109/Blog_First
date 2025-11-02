@@ -22,8 +22,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+<body class="bg-gray-100 text-gray-900">
+    <!-- 導覽列 -->
+    <%= render "shared/navbar" %>
+
+    <!-- 主內容 -->
+    <main class="container mx-auto mt-6">
       <%= yield %>
     </main>
   </body>
